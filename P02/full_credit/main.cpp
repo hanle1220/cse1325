@@ -4,7 +4,7 @@
 int main(){
     srand(time(NULL));
         
-    int dice, face, roll, num;
+    int dice, face, roll, value;
 
     std::cout << "Number of dice? " ;
     std::cin >> dice;
@@ -21,9 +21,9 @@ int main(){
          std::cout << "Roll " << i << ": ";
 
          for(int j=0; j<dice; j++){
-            num = rand()%face+1; 
-            std::cout << num << " ";
-            sum += num;
+            value = rand()%face+1; 
+            std::cout << value << " ";
+            sum += value;
           } std::cout << "Sum: "<< sum << std::endl;
 
     }
