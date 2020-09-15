@@ -4,7 +4,7 @@
 
 class Tile { 
     std::string _word;
-    bool _matched;
+    bool _matched = false;
     int _width = -1;
     std::string _blank;
   public:

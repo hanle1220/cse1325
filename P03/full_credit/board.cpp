@@ -29,28 +29,28 @@ Board::Board(int tiles) {
 }
 
 std::string Board::attempt(int tile1, int tile2){
-    Tile t1{_tiles[tile1]};
-    Tile t2{_tiles[tile2]};
-    if (t1.match(t2)){return _tiles[tile1].word()+ "MATCHES" +_tiles[tile2].word();}
-    else {return _tiles[tile1].word() + " " +_tiles[tile2].word();}
+    if (_tiles[tile1].match(_tiles[tile2])){
+        _tiles[tile2]= _tiles[tile1];          
+        return _tiles[tile1].word()+ " MATCHES " +_tiles[tile2].word()+"\n";
+    }
+    else {return _tiles[tile1].word() + " " +_tiles[tile2].word() + "\n";}
 }
 
 bool Board::solved() {
-    if(Board::to_string().find("-") != 0) return false;
+    if(Board::to_string().find('-',1) != 0) return false;
     else return true;
 }
 
 std::string Board::to_string(){ 
-    std::string s;    
-    for(int i=0; i<_tiles.size(); i++) 
-        s += std::to_string(i) + ") " + Tile::to_string() + "\n";
+    std::string s;
+    for(int i=0; i<_tiles.size(); i++) {s +=  std::to_string(i) + ") " + _tiles[i].to_string() + "\n";}
     return s;
 }
 
 
 
     
-    
+   
 
 
 
