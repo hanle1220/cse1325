@@ -37,8 +37,10 @@ std::string Board::attempt(int tile1, int tile2){
 }
 
 bool Board::solved() {
-    if(Board::to_string().find('-',1) != 0) return false;
-    else return true;
+    int n=0;
+    for(int i=0; i<_tiles.size(); i++){if(_tiles[i].to_string().find('-') == 0) {n++;}}
+    if(n==0) {return true;}
+    else {return false;}
 }
 
 std::string Board::to_string(){ 

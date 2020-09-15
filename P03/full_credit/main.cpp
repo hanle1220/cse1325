@@ -11,14 +11,14 @@ int main(){
     
     Board b{num};
     
-    while(b.solved()== false){
+    do{
         std::cout << b.to_string();
         std::cout <<"Guest " << i << ", select 2 unmatched tiles: ";
         std::cin >> tile1 >> tile2;
         std::cout << b.attempt(tile1, tile2);
-        
         i++;
-    }
-    std::cout << "You win!";
+    }while(b.solved()== false);
+    std::cout << b.to_string();
+    std::cout << "You win!\n";
     
 }
