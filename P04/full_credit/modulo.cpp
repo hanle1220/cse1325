@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& ost, Modulo& m){
 std::istream& operator>>(std::istream& ist, Modulo& m){
     int input;
     ist >> input;
-    input = (input-m._offset)%m._modulo;
+    m._value = (input-m._offset)%m._modulo;
     return ist;
 }
 
