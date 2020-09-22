@@ -15,5 +15,5 @@ int main() {
         minutes += step;             // Count using integers - roll overs will be added to hours
         std::cout << hours << ':' << std::setw(2) << std::setfill('0') << minutes << ", ";
     }
-    std::cout << std::endl;
-}
+    std::cout << std::endl; 
+} 

@@ -25,9 +25,14 @@ Modulo& Modulo::operator++(){
         _value-=_modulo;  
         _nmsd->_value++; 
         if(_nmsd->_value >_nmsd->_modulo){
-            _nmsd->_value-=_nmsd->_modulo;           
+            _nmsd->_value-=_nmsd->_modulo;
+            _nmsd->_nmsd->_value++;
+                if( _nmsd->_nmsd->_value >_nmsd->_nmsd->_modulo){
+                       _nmsd->_nmsd->_value-=_nmsd->_nmsd->_modulo;
+                }
         }
      }           
+    
     return *this;    
 }
 Modulo Modulo::operator++(int){
@@ -43,7 +48,7 @@ int Modulo::compare(const int rhs) {
 }
 
 std::ostream& operator<<(std::ostream& ost, Modulo& m){    
-    ost << m._value;
+    ost << m._value+m._offset;
     return ost;
 }
 
