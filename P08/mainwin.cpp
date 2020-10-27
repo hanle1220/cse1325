@@ -330,7 +330,9 @@ void Mainwin::on_save_as_click() {
 }
 
 void Mainwin::on_save_click() {
-   
+    std::ofstream ofs{"untitled.manga"};
+    store->save(ofs);
+    Gtk::MessageDialog{*this, "Saved to 'untitled.manga'"}.run();
 }
 
 void Mainwin::on_open_click() {
