@@ -16,11 +16,14 @@ std::ostream& operator<<(std::ostream& ost, const Product& product) {
 int Product::_nextsn = 0;
 
 Product::Product(std::istream& ist){
-    getline(ist, _name);
-    ist >> _price;
-    getline(ist, _description);
+    ist >> _nextsn; 
+    ist.ignore(32767,'\n');
+    std::getline(ist, _name);
     ist >> _stocknum;
-    ist.ignore(32767,'n');
+    ist.ignore(32767,'\n');
+    ist >> _price; 
+    ist.ignore(32767,'\n');
+    std::getline(ist, _description);
 }
 
 void Product::save(std::ostream& ost){

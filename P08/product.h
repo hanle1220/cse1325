@@ -8,7 +8,7 @@ class Product {
     Product(std::string name, double price, std::string description);
     friend std::ostream& operator<<(std::ostream& ost, const Product& product);
     Product (std::istream& ist);
-    void save(std::ostream& ost);
+    virtual void save(std::ostream& ost);
   protected:
     virtual std::string to_string() const;
   private:

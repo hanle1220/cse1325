@@ -17,12 +17,26 @@ std::string to_string(Material material) {
     else throw std::out_of_range("Invalid Material value");
 }
 
-Mulch::Mulch(std::istream& ist) : Product(ist){ }
+Material Mulch::_string(std::string material) {
+    if(material == "rubber") return Material::RUBBER;
+    else if(material == "pine") return Material::PINE;
+    else if(material == "cedar") return Material::CEDAR;
+    else if(material == "hardwood") return Material::HARDWOOD;
+    else throw std::out_of_range("Invalid Material value");
+}
+
+Mulch::Mulch(std::istream& ist) : Product(ist){
+    std::string material;
+    ist >> _volume;
+    ist.ignore(32767,'\n');
+    getline(ist, material);
+    _material = Mulch::_string(material);
+}
 
 void Mulch::save(std::ostream& ost) {
-    ost << "Mulch" ; 
+    ost << "mulch\n" ; 
     Product::save(ost);
     ost << _volume << std::endl;
-    ost << Mulch::to_string() << std::endl;
+    ost << ::to_string(_material) << std::endl;
 
 }

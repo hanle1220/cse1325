@@ -12,6 +12,7 @@ enum class Material {
 
 std::string to_string(Material material);
 
+
 std::ostream& operator<<(std::ostream& ost, const Material& material);
 
 class Mulch : public Product {
@@ -19,6 +20,7 @@ class Mulch : public Product {
     Mulch(std::string name, double price, std::string description, int volume, Material material);
     Mulch(std::istream& ist);
     void save(std::ostream& ost);
+    Material _string(std::string material);
   protected:
     std::string to_string() const override;
   private:

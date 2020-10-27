@@ -1,5 +1,6 @@
 #include "mainwin.h"
 #include <iostream> 
+#include <fstream>
 
 std::string Mainwin::get_string(std::string prompt) {
     return prompt;
@@ -10,7 +11,7 @@ double Mainwin::get_double(std::string prompt) {
         try {
             return std::stod(prompt);
         } catch(std::exception& e) {
-            Gtk::MessageDialog{"ERROR", true}.run();
+            Gtk::MessageDialog{*this, "ERROR"}.run();
         }
     }
 }
@@ -20,7 +21,7 @@ int Mainwin::get_int(std::string prompt) {
         try {
             return std::stoi(prompt);
         } catch(std::exception& e) {
-            Gtk::MessageDialog{"ERROR", true}.run();
+            Gtk::MessageDialog{*this, "ERROR"}.run();
         }
     }
 }
@@ -68,14 +69,24 @@ Mainwin::Mainwin(){
     menuitem_file->set_submenu(*filemenu);
 
     //New store
-    Gtk::MenuItem *menuitem_new = Gtk::manage(new Gtk::MenuItem("_New Store", true));
+    Gtk::MenuItem *menuitem_new = Gtk::manage(new Gtk::MenuItem("_New", true));
     menuitem_new->signal_activate().connect([this] {this->on_new_store_click();});
     filemenu->append(*menuitem_new);
+    
+    //Save as
+    Gtk::MenuItem *menuitem_save = Gtk::manage(new Gtk::MenuItem("_Save", true));
+    menuitem_save->signal_activate().connect([this] {this->on_save_click();});
+    filemenu->append(*menuitem_save);
 
     //Save as
     Gtk::MenuItem *menuitem_save_as = Gtk::manage(new Gtk::MenuItem("_Save as", true));
     menuitem_save_as->signal_activate().connect([this] {this->on_save_as_click();});
     filemenu->append(*menuitem_save_as);
+    
+    //Open
+    Gtk::MenuItem *menuitem_open = Gtk::manage(new Gtk::MenuItem("_Open", true));
+    menuitem_open->signal_activate().connect([this] {this->on_open_click();});
+    filemenu->append(*menuitem_open);
 
     //Q U I T
     Gtk::MenuItem *menuitem_quit = Gtk::manage(new Gtk::MenuItem("_Quit", true));
@@ -103,7 +114,16 @@ Mainwin::Mainwin(){
     menuitem_mulch->signal_activate().connect([this] {this->on_new_mulch_click();});
     insertmenu->append(*menuitem_mulch);
 
+      //H E L P
+    Gtk::MenuItem *menuitem_help = Gtk::manage(new Gtk::MenuItem("_Help", true));
+    menubar->append(*menuitem_help);
+    Gtk::Menu *helpmenu = Gtk::manage(new Gtk::Menu());
+    menuitem_help->set_submenu(*helpmenu);
 
+       //A B O U T
+    Gtk::MenuItem *menuitem_about = Gtk::manage(new Gtk::MenuItem("_About", true));
+    menuitem_about->signal_activate().connect([this] {this->on_about_click();});
+    helpmenu->append(*menuitem_about);
 
     display = Gtk::manage(new Gtk::Label());
     display->set_hexpand(true);
@@ -272,6 +292,7 @@ void Mainwin::on_new_store_click(){
     dialog.run();
  
     store = new Store{e_name.get_text()};
+    on_view_products_click();
 }
 
 void Mainwin::on_save_as_click() {
@@ -301,11 +322,56 @@ void Mainwin::on_save_as_click() {
         try {
             std::ofstream ofs{dialog.get_filename()};
             store->save(ofs);
-           // ofs << computer_player->get_active() << std::endl;
             if(!ofs) throw std::runtime_error{"Error writing file"};
         } catch(std::exception& e) {
             Gtk::MessageDialog{*this, "Unable to save"}.run();
         }
     }
+}
+
+void Mainwin::on_save_click() {
+   
+}
+
+void Mainwin::on_open_click() {
+    Gtk::FileChooserDialog dialog("Please choose a file",
+          Gtk::FileChooserAction::FILE_CHOOSER_ACTION_OPEN);
+    dialog.set_transient_for(*this);
+
+    auto filter_store = Gtk::FileFilter::create();
+    filter_store->set_name("MANGA files");
+    filter_store->add_pattern("*.manga");
+    dialog.add_filter(filter_store);
+ 
+    auto filter_any = Gtk::FileFilter::create();
+    filter_any->set_name("Any files");
+    filter_any->add_pattern("*");
+    dialog.add_filter(filter_any);
+
+    dialog.set_filename("untitled.manga");
+
+    //Add response buttons the the dialog:
+    dialog.add_button("_Cancel", 0);
+    dialog.add_button("_Open", 1);
+
+    int result = dialog.run();
+
+    if (result == 1) {   
+            delete store;
+            std::ifstream ifs{dialog.get_filename()};
+            store = new Store{ifs};
+            on_view_products_click();
+    }
+}
+
+void Mainwin::on_about_click(){
+    Gtk::AboutDialog dialog;
+    dialog.set_transient_for(*this); 
+    dialog.set_program_name("MANGA\nMavs Arboreta, Nursery, and Garden Association");
+    auto logo = Gdk::Pixbuf::create_from_file("tree.jpg");
+    dialog.set_logo(logo);
+    std::vector< Glib::ustring > authors = {"Han Le"};
+    dialog.set_authors(authors);
+    dialog.run();
 }
 
