@@ -15,7 +15,8 @@ const Customer& Store::customer(int index) {return *_customers.at(index);}
 
 void Store::save(std::ostream& ost){
     ost << _name << std::endl;
-    for(Product* p : _products) p->save(ost);    
+    for(Product* p : _products) p->save(ost); 
+    for(Customer* c: _customers) c->save(ost);  
 }
 
 Store::Store(std::istream& ist){   
@@ -24,6 +25,7 @@ Store::Store(std::istream& ist){
     while(std::getline(ist, type)){
         if (type == "tool") { add_product(*(new Tool{ist})); }
         if (type == "plant") { add_product(*(new Plant{ist}));}
-        if (type == "mulch") { add_product(*(new Mulch{ist}));}       
+        if (type == "mulch") { add_product(*(new Mulch{ist}));}     
+        if (type == "customer") {add_customer(*(new Customer{ist}));} 
     }  
 }
