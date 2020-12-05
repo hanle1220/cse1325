@@ -12,10 +12,8 @@ Mandelbrot::Mandelbrot(int width, int height, int icount, int nthreads)
     for(int i=0; i<_nthreads; i++){
         for (int y = _height*i/_nthreads; y < (_height*(i+1)/_nthreads)-1; y++)  {
             calculate_rows(y, y);
-        }
-            
+        }            
     }
-
 }
 
 // Deallocate results memory
