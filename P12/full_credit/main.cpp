@@ -10,9 +10,9 @@ int main(int argc, char** argv){
         for(int i=1; i<argc-1; i++){
             if(atoi(argv[i]) == 0 ) throw std::invalid_argument{"Invalid argument"};
             else {
-                if(argc <= 2) width = std::stoi(argv[1]);   
-                if(argc <= 3) height = std::stoi(argv[2]);  
-                if(argc <= 4) icount = std::stoi(argv[3]); 
+                if(argc >= 2) width = std::stoi(argv[1]);   
+                if(argc >= 3) height = std::stoi(argv[2]);  
+                if(argc >= 4) icount = std::stoi(argv[3]); 
                 if(argc <= 6) nthreads = std::stoi(argv[4]);   
             }    
         }

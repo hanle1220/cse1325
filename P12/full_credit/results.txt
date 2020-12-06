@@ -15,17 +15,125 @@ sys	0m0.020s
 
 YOUR Timing:
 
+  width: 2000  height: 2000  icount: 100  threads: 1
+  wrote: image.ppm
 
+real	0m12.004s
+user	0m11.480s
+sys	0m0.047s
 
+  width: 2000  height: 2000  icount: 100  threads: 2
+  wrote: image.ppm
+
+real	0m12.069s
+user	0m11.495s
+sys	0m0.027s
+
+  width: 2000  height: 2000  icount: 100  threads: 3
+  wrote: image.ppm
+
+real	0m12.265s
+user	0m11.473s
+sys	0m0.035s
+
+  width: 2000  height: 2000  icount: 100  threads: 4
+  wrote: image.ppm
+
+real	0m11.938s
+user	0m11.456s
+sys	0m0.028s
+
+  width: 2000  height: 2000  icount: 100  threads: 5
+  wrote: image.ppm
+
+real	0m11.520s
+user	0m11.467s
+sys	0m0.004s
+
+  width: 2000  height: 2000  icount: 100  threads: 6
+  wrote: image.ppm
+
+real	0m11.519s
+user	0m11.426s
+sys	0m0.040s
+
+  width: 2000  height: 2000  icount: 100  threads: 7
+  wrote: image.ppm
+
+real	0m11.437s
+user	0m11.336s
+sys	0m0.036s
+
+  width: 2000  height: 2000  icount: 100  threads: 8
+  wrote: image.ppm
+
+real	0m11.502s
+user	0m11.400s
+sys	0m0.052s
+
+  width: 2000  height: 2000  icount: 100  threads: 9
+  wrote: image.ppm
+
+real	0m11.508s
+user	0m11.433s
+sys	0m0.016s
+
+  width: 2000  height: 2000  icount: 100  threads: 10
+  wrote: image.ppm
+
+real	0m11.533s
+user	0m11.450s
+sys	0m0.032s
+
+  width: 2000  height: 2000  icount: 100  threads: 11
+  wrote: image.ppm
+
+real	0m11.498s
+user	0m11.418s
+sys	0m0.024s
+
+  width: 2000  height: 2000  icount: 100  threads: 12
+  wrote: image.ppm
+
+real	0m11.494s
+user	0m11.411s
+sys	0m0.028s
+
+  width: 2000  height: 2000  icount: 100  threads: 13
+  wrote: image.ppm
+
+real	0m11.494s
+user	0m11.407s
+sys	0m0.032s
+
+  width: 2000  height: 2000  icount: 100  threads: 14
+  wrote: image.ppm
+
+real	0m11.524s
+user	0m11.407s
+sys	0m0.044s
+
+  width: 2000  height: 2000  icount: 100  threads: 15
+  wrote: image.ppm
+
+real	0m11.477s
+user	0m11.393s
+sys	0m0.032s
+
+  width: 2000  height: 2000  icount: 100  threads: 16
+  wrote: image.ppm
+
+real	0m11.480s
+user	0m11.385s
+sys	0m0.040s
 
 QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
 
-
+    Adding more threads continue to speed up the program because it can calculate more rows at the same time.
 
 
 QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
 
-
-
+    Yes. It increases the "system load" because it has to execute many thread at the same time.
 
 
